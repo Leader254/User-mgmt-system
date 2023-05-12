@@ -2,41 +2,32 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login Page in HTML with CSS Code Example</title>
+  <title>Login Page | UMS</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-
+<link rel="stylesheet" href="./style.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
-<div class="box-form">
-		<div class="right">
-		<h5>Login</h5>
-		<div class="inputs">
-			<input type="text" placeholder="Username">
-			<br>
-			<input type="password" placeholder="Password">
+<div class="form">
+	<div class="form-box">
+	  <div class="form-left">
+		<div class="form-padding"><img class="form-image" src="https://i.pinimg.com/originals/8b/44/51/8b4451665d6b2139e29f29b51ffb1829.png"/></div>
+	  </div>
+	  <div class="form-right">
+		<div class="form-padding-right">
+		  <form>
+			<h1 class="form-title">Member Login</h1>
+			<input class="form-name" type="text" placeholder="Username"/>
+			<input class="form-password" type="password" placeholder="Password"/>
+			<input class="form-submit-btn" type="submit" value="Login"/>
+		  </form><span>Forgot </a><a class="form-link" href="#">Password</a></span>
+		  <p> <a class="form-link" href="../index.html">Create your account</a></p>
 		</div>
-			
-			<br><br>
-			
-		<div class="remember-me--forget-password">
-				<!-- Angular -->
-	<label>
-		<input type="checkbox" name="item" checked/>
-		<span class="text-checkbox">Remember me</span>
-	</label>
-			<p>Forget password?</p>
-		</div>
-			
-			<br>
-			<button>Login</button>
-			<button style="margin-right: 10px;"><a style="text-decoration: none; color: aliceblue;" href="../index.html">Sign Up</a> </button>
+	  </div>
 	</div>
-	
-</div>
-<!-- partial -->
+  </div>
   
 </body>
 </html>

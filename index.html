@@ -6,16 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
+    <style>
+        #view-table-btn {
+          display: none;
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        #user-info-heading {
+          display: none;
+          font-size: 24px;
+          font-weight: bold;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+        
+        #user-table {
+          display: none;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #user-table th, #user-table td {
+          text-align: left;
+          padding: 8px;
+        }
+        
+        #user-table th {
+          background-color: #4CAF50;
+          color: white;
+        }
+        
+        #user-table tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+        
+        #user-table tr:hover {
+          background-color: #ddd;
+        }
+      </style>
+      
     <title>User Mgmt System</title>
 </head>
 
 <body>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li style="margin-left: 35px; font-size: 30px;"><a href="#">Home</a></li>
             <li style="float:right"><a class="active" href="#">Sign Up</a></li>
-            <li style="float:right"><a class="login" href="#">Login</a></li>
+            <li style="float:right"><a class="login" href="./login page/index.html">Login</a></li>
         </ul>
     </nav>
     <div class="container1">
@@ -46,15 +91,18 @@
                     
                 </select>
 
-                <label for="userid">Your Password:</label>
+                <label for="userpass">Your Password:</label>
                 <input type="password" id="pass" name="pass" placeholder="Your password.." required>
 
                 <input type="submit" value="Submit" class="submit">
                 <p>Already have an account <a href="./login page/index.html" style="text-decoration: none;">Login Here</a></p>
+                <br>
             </form>
-            <h1>User Information Table</h1>
-
-                <table>
+                <p id="success-message"></p>
+                <br>
+                <button id="view-table-btn" style="display: none;">View Table</button>
+                <h1 id="user-info-heading" style="display: none;">User Information Table</h1>
+                <table id="user-table" style="display: none;">
                 <thead>
                     <tr>
                     <th>Username</th>
@@ -67,9 +115,6 @@
                 <tbody id="table-data"></tbody>
                 </table>
         </div>
-    </div>
-    <div class="container2">
-        <ul id="user-list"></ul>
     </div>
     <script src="./index.js"></script>
 </body>
