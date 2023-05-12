@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form and Table Example</title>
+  </head>
+  <body>
+    <h1>User Information Form</h1>
+
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="name" name="firstname" placeholder="Your name.." required>
+
+      <label for="userid">User id:</label>
+      <input type="number" id="id" name="id" placeholder="Your id.." required>
+
+      <label for="country">Country:</label>
+      <select id="country" name="country">
+        <option value="Afghanistan">Afghanistan</option>
+        <option value="Albania">Albania</option>
+        <option value="Algeria">Algeria</option>
+      </select>
+
+      <label for="languages">Languages:</label>
+      <select id="languages" name="language">
+        <option value="Afrikaans">Afrikaans</option>
+        <option value="Albanian">Albanian</option>
+        <option value="Arabic">Arabic</option>
+      </select>
+
+      <label for="userid">Your Password:</label>
+      <input type="password" id="pass" name="pass" placeholder="Your password.." required>
+
+      <input type="submit" value="Submit" class="submit">
+      <p>Already have an account <a href="./login page/index.html" style="text-decoration: none;">Login Here</a></p>
+    </form>
+
+    <h1>User Information Table</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>User ID</th>
+          <th>Country</th>
+          <th>Languages</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody id="table-data"></tbody>
+    </table>
+
+    <script>
+      const form = document.querySelector('form');
+      const tableData = document.getElementById('table-data');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('name').value;
+        const userId = document.getElementById('id').value;
+        const country = document.getElementById('country').value;
+        const language = document.getElementById('languages').value;
+        const password = document.getElementById('pass').value;
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td>${username}</td>
+          <td>${userId}</td>
+          <td>${country}</td>
+          <td>${language}</td>
+          <td>${password}</td>
+        `;
+
+        tableData.appendChild(newRow);
+
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
