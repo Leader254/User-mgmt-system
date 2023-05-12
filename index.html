@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="./index.css">
+    <title>User Mgmt System</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li style="float:right"><a class="active" href="#">Sign Up</a></li>
+            <li style="float:right"><a class="login" href="#">Login</a></li>
+        </ul>
+    </nav>
+    <div class="container1">
+        <h1 class="system">
+            User Management System
+        </h1>
+        <div>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="name" name="firstname" placeholder="Your name.." required>
+
+                <label for="userid">User id:</label>
+                <input type="number" id="id" name="id" placeholder="Your id.." required>
+
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="Albania">Albania</option>
+                    <option value="Algeria">Algeria</option>
+                    
+                </select>
+                <label for="languages">Languages:</label>
+                <select id="languages" name="language">
+                    <option value="Afrikaans">Afrikaans</option>
+                    <option value="Albanian">Albanian</option>
+                    <option value="Arabic">Arabic</option>
+                    
+                </select>
+
+                <label for="userid">Your Password:</label>
+                <input type="password" id="pass" name="pass" placeholder="Your password.." required>
+
+                <input type="submit" value="Submit" class="submit">
+                <p>Already have an account <a href="./login.html" style="text-decoration: none;">Login Here</a></p>
+            </form>
+            <ul id="item-list"></ul>
+        </div>
+    </div>
+    <div class="container2">
+        <ul id="user-list"></ul>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
