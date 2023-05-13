@@ -1,11 +1,21 @@
 const form = document.querySelector('form');
-const tableData = document.getElementById('table-data');
-const successMessage = document.getElementById('success-message');
-const viewTableBtn = document.getElementById('view-table-btn');
-const userTable = document.getElementById('user-table');
-const userInfoHeading = document.getElementById('user-info-heading');
+const tableBody = document.getElementById('table-body');
+const updateContainer = document.getElementById('update-container');
+const updateNameInput = document.getElementById('update-name-input');
+const updateIdInput = document.getElementById('update-userid-input');
+const updateCountryInput = document.getElementById('update-country-input');
+const updateLanguageInput = document.getElementById('update-language-input');
+const updatePasswordInput = document.getElementById('update-password-input');
+const updateBtn = document.getElementById('update-btn');
+const cancelBtn = document.getElementById('cancel-btn');
 
-let currentRow = null;
+let users = [];
+
+// Retrieve data from local storage
+if (localStorage.getItem('users')) {
+  users = JSON.parse(localStorage.getItem('users'));
+  renderUsers(users);
+}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -15,59 +25,85 @@ form.addEventListener('submit', (event) => {
   const country = document.getElementById('country').value;
   const language = document.getElementById('languages').value;
   const password = document.getElementById('pass').value;
-  document.getElementById('pass').type = 'text';
 
-  if (currentRow) {
-    // update the current row
-    currentRow.cells[0].textContent = username;
-    currentRow.cells[1].textContent = userId;
-    currentRow.cells[2].textContent = country;
-    currentRow.cells[3].textContent = language;
-    currentRow.cells[4].textContent = password;
-    currentRow = null;
-    successMessage.textContent = "Successfully updated your data.";
-  } else {
-    // add a new row
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-      <td>${username}</td>
-      <td>${userId}</td>
-      <td>${country}</td>
-      <td>${language}</td>
-      <td>${password}</td>
-      <td><button class="edit-btn">Edit</button></td>
-      <td><button class="delete-btn">Delete</button></td>
-    `;
-    const editBtn = newRow.querySelector('.edit-btn');
-    const deleteBtn = newRow.querySelector('.delete-btn');
+  const user = { username, userId, country, language, password };
+  users.push(user);
 
-    editBtn.addEventListener('click', () => {
-      // populate the form with the current row's data
-      document.getElementById('name').value = newRow.cells[0].textContent;
-      document.getElementById('id').value = newRow.cells[1].textContent;
-      document.getElementById('country').value = newRow.cells[2].textContent;
-      document.getElementById('languages').value = newRow.cells[3].textContent;
-      document.getElementById('pass').value = newRow.cells[4].textContent;
-      document.getElementById('pass').type = 'text';
-      currentRow = newRow;
-    });
+  // Save data to local storage
+  localStorage.setItem('users', JSON.stringify(users));
 
-    deleteBtn.addEventListener('click', () => {
-      // delete the current row
-      newRow.remove();
-      successMessage.textContent = "Successfully deleted the row.";
-    });
-
-    tableData.appendChild(newRow);
-    successMessage.textContent = "Successfully added your data.";
-    viewTableBtn.style.display = "block";
-    userInfoHeading.style.display = "block";
-  }
+  renderUsers(users);
 
   form.reset();
 });
 
-viewTableBtn.addEventListener('click', () => {
-  userTable.style.display = "table";
-  window.location.href = "#user-table";
-});
+function renderUsers(users) {
+  tableBody.innerHTML = '';
+
+  users.forEach(user => {
+    const row = document.createElement('tr');
+    const usernameCell = document.createElement('td');
+    const userIdCell = document.createElement('td');
+    const countryCell = document.createElement('td');
+    const languageCell = document.createElement('td');
+    const passwordCell = document.createElement('td');
+    const editButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
+
+    usernameCell.innerText = user.username;
+    userIdCell.innerText = user.userId;
+    countryCell.innerText = user.country;
+    languageCell.innerText = user.language;
+    passwordCell.innerText = user.password;
+    editButton.innerText = 'Edit';
+    deleteButton.innerText = 'Delete';
+
+    editButton.addEventListener('click', () => editUser(user));
+    deleteButton.addEventListener('click', () => deleteUser(user));
+
+    row.appendChild(usernameCell);
+    row.appendChild(userIdCell);
+    row.appendChild(countryCell);
+    row.appendChild(languageCell);
+    row.appendChild(passwordCell);
+    row.appendChild(editButton);
+    row.appendChild(deleteButton);
+
+    tableBody.appendChild(row);
+  });
+}
+
+function editUser(user) {
+  updateNameInput.value = user.username;
+  updateIdInput.value = user.userId;
+  updateCountryInput.value = user.country;
+  updateLanguageInput.value = user.language;
+  updatePasswordInput.value = user.password;
+
+  updateContainer.style.display = 'block';
+
+  updateBtn.addEventListener('click', () => {
+    user.username = updateNameInput.value;
+    user.userId = updateIdInput.value;
+    user.country = updateCountryInput.value;
+    user.language = updateLanguageInput.value;
+    user.password = updatePasswordInput.value;
+
+    localStorage.setItem('users', JSON.stringify(users));
+    renderUsers(users);
+
+    updateContainer.style.display = 'none';
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    updateContainer.style.display = 'none';
+  });
+}
+
+function deleteUser(user) {
+  const index = users.indexOf(user);
+  users.splice(index, 1);
+
+  localStorage.setItem('users', JSON.stringify(users));
+  renderUsers(users);
+}
